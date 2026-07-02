@@ -1,0 +1,30 @@
+.error-message-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 12px;
+  color: #e53e3e;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 2rem;
+}
+
+.retry-btn {
+  margin-top: 8px;
+  padding: 8px 24px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.retry-btn:hover {
+  background: #5568d3;
+}

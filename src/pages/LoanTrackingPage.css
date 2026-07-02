@@ -1,0 +1,140 @@
+.loan-tracking-page {
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding: 0 0 60px;
+}
+
+.tracking-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 90px 20px 70px;
+  text-align: center;
+}
+
+.tracking-hero h1 {
+  margin: 0 0 8px 0;
+  color: white;
+  font-size: 2.6rem;
+}
+
+.tracking-hero p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tracking-card {
+  max-width: 1000px;
+  margin: -40px auto 0;
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+.tracking-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 25px;
+}
+
+.tracking-summary span {
+  display: block;
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.tracking-summary strong {
+  color: #111827;
+  font-size: 1rem;
+}
+
+.tracking-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.tracking-step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.step-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  position: relative;
+}
+
+.tracking-step.completed .step-dot {
+  background: #10b981;
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.15);
+}
+
+.tracking-step.in-progress .step-dot {
+  background: #6366f1;
+  box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.15);
+}
+
+.tracking-step .step-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.step-title {
+  font-weight: 700;
+  color: #111827;
+}
+
+.step-subtitle {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.tracking-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.tracking-actions .btn-secondary,
+.tracking-actions .btn-primary {
+  padding: 12px 26px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tracking-actions .btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.tracking-actions .btn-primary {
+  background: #667eea;
+  color: white;
+}
+
+@media (max-width: 900px) {
+  .tracking-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .tracking-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .tracking-actions {
+    flex-direction: column;
+  }
+}

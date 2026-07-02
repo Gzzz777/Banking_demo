@@ -1,0 +1,211 @@
+.account-dashboard {
+  padding: 60px 5%;
+  background: #f5f7fa;
+  min-height: 60vh;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header h2 {
+  color: #2d3748;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.dashboard-header p {
+  color: #718096;
+  font-size: 1.1rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.account-card,
+.transactions-card,
+.quick-links-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-header h3 {
+  color: #2d3748;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.account-type {
+  background: #667eea;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.account-number {
+  color: #718096;
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+}
+
+.balance-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.balance-label {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.balance-amount {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.account-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.account-actions button {
+  padding: 12px;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.account-actions button:hover {
+  background: #667eea;
+  color: white;
+}
+
+.transactions-card h3,
+.quick-links-card h3 {
+  color: #2d3748;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.transactions-list {
+  margin-bottom: 20px;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.txn-desc {
+  color: #2d3748;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.txn-date {
+  color: #718096;
+  font-size: 0.85rem;
+}
+
+.txn-amount {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.txn-amount.credit {
+  color: #48bb78;
+}
+
+.txn-amount.debit {
+  color: #f56565;
+}
+
+.view-all-btn {
+  width: 100%;
+  padding: 12px;
+  background: #edf2f7;
+  border: none;
+  border-radius: 8px;
+  color: #4a5568;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-all-btn:hover {
+  background: #e2e8f0;
+}
+
+.quick-links-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.quick-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #f7fafc;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quick-link:hover {
+  background: #edf2f7;
+  transform: translateY(-3px);
+}
+
+.link-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.quick-link span:last-child {
+  color: #4a5568;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .balance-amount {
+    font-size: 2rem;
+  }
+}
