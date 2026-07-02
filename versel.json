@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "src": "/(.*)",
+      "middleware": "api/auth",
+      "continue": true
+    }
+  ]
+}
