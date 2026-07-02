@@ -67,8 +67,7 @@ export default async function middleware(req) {
     </head>
     <body>
       <div class="card">
-        <h1>🔒 Private Demo Site</h1>
-        <p>Please enter the access token to view this application.</p>
+        <p>Please enter the password to view this application.</p>
         <form method="GET" action="">
           <input type="password" name="password" placeholder="Enter Password" required autofocus />
           <button type="submit">Submit</button>
