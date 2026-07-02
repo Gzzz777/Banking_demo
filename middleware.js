@@ -1,43 +1,50 @@
-import { NextResponse } from 'next/server';
+export const config = {
+  // Matches all routes except static files (images, favicons, etc.)
+  matcher: '/((?!_next|favicon.ico|.*\\..*).*)',
+};
 
-export function middleware(req) {
-  const cookie = req.cookies.get('site_auth_token')?.value;
-  const url = req.nextUrl.clone();
-
-  // The password you set in Vercel Environment Variables
+export default async function middleware(req) {
+  const url = new URL(req.url);
+  const cookieHeader = req.headers.get('cookie') || '';
+  
+  // Simple check to see if the authentication cookie is present
+  const isTargetAuthenticated = cookieHeader.includes('site_auth_token=authenticated');
   const SECRET_PASSWORD = process.env.SITE_PASSWORD;
 
-  // Safety fallback if environment variable isn't set up yet
+  // Safety fallback if environment variable isn't configured in Vercel yet
   if (!SECRET_PASSWORD) {
-    return NextResponse.next();
+    return new Response(null, { status: 302, headers: { 'Location': url.href } });
   }
 
-  // 1. Handle password submission via query parameter or form action
+  // 1. Handle password submission via query parameters (?password=...)
   if (url.searchParams.has('password')) {
     const submittedPassword = url.searchParams.get('password');
-    
+
     if (submittedPassword === SECRET_PASSWORD) {
-      // Correct password: set a secure session cookie and redirect to clean URL
-      const response = NextResponse.redirect(url.origin + url.pathname);
-      response.cookies.set('site_auth_token', 'authenticated', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
-        maxAge: 60 * 60 * 24 * 7, // Valid for 7 days
+      // Correct password: Set cookie and redirect back to clean original path
+      url.searchParams.delete('password');
+      return new Response(null, {
+        status: 302,
+        headers: {
+          'Location': url.pathname,
+          'Set-Cookie': 'site_auth_token=authenticated; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=604800',
+        },
       });
-      return response;
     } else {
-      // Wrong password: redirect back with an error indicator
-      return NextResponse.redirect(`${url.origin}${url.pathname}?error=true`);
+      // Wrong password: Redirect back with error flag
+      return new Response(null, {
+        status: 302,
+        headers: { 'Location': `${url.pathname}?error=true` },
+      });
     }
   }
 
-  // 2. If the user has a valid cookie, let them see your React App
-  if (cookie === 'authenticated') {
-    return NextResponse.next();
+  // 2. If the user is already authenticated, allow the request to pass through normally
+  if (isTargetAuthenticated) {
+    return; // Returning nothing tells Vercel to proceed to your React static assets
   }
 
-  // 3. If no valid cookie, serve a beautiful standalone HTML lock screen directly from the edge
+  // 3. Otherwise, serve the standalone lock screen HTML page directly from the edge network
   const hasError = url.searchParams.has('error');
   const html = `
     <!DOCTYPE html>
@@ -72,12 +79,7 @@ export function middleware(req) {
     </html>
   `;
 
-  return new NextResponse(html, {
+  return new Response(html, {
     headers: { 'Content-Type': 'text/html' },
   });
 }
-
-// Config stops middleware from running against static assets like images
-export const config = {
-  matcher: '/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)',
-};
